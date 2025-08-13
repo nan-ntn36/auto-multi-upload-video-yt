@@ -1,0 +1,54 @@
+Document tools multi upload video shorts youtube
+
+
+1. https://console.cloud.google.com/
+create new project
+
+Click API & Services -> Libary -> Youtuber Data API V3 -> enable -> manage
+-> credentials -> create credentials -> Create OAuth client ID -> Desktop app
+
+Xong thì tải cái file đó thay thế cho file client_secret.json (nằm chung main.py) 
+
+Tiếp tục set up : 
+click -> API & Services -> OAuth consent screen -> Audience 
+	+ Publishing status: testing
+	+ user type: external
+	+ test users:
+		- add user 
+		Thêm các email mà đã tạo profile google đăng nhập youtube
+
+2. Config file 
+CHROME_PATH: nơi chứa chrome đã cài đặt 
+CLIENT_SECRET_FILE: là cái file khi setup https://console.cloud.google.com/
+PROFILES: các profile nằm trong C:\Users\<Tên user của mình>\AppData\Local\Google\Chrome\User Data
+	+ Mặt định là : defautl 
+	+ Các profile khác : profile 1,2,3....
+PROFILE_PORTS: mỗi một trang profile là 1 port khác nhau -> nó phải giống với trong file CLIENT_SECRET_FILE ( sửa ở cuối)
+VD:   
+	"redirect_uris":
+	["http://localhost",
+	"http://localhost:8080",
+	"http://localhost:8081",
+	"http://localhost:8082"] 
+--------------------------------------------
+{
+    "CHROME_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "CLIENT_SECRET_FILE": "client_secret.json",
+    "PROFILES": {
+        "Profile 2": {
+            "display_name": "YouTube Cá nhân",
+            "position": [0, 0],
+            "token": "tokens/Profile2.json"
+        },
+        "Profile 1": {
+            "display_name": "Profile 1",
+            "position": [320, 0],
+            "token": "tokens/profile1.json"
+        }
+    },
+    "PROFILE_PORTS": {
+        "Profile 2": 8080,
+        "Profile 1": 8081
+    },
+    "WINDOW_SIZE": [300, 300]
+}
